@@ -8,36 +8,59 @@
      </div>
    </div>
    
-   <div v-if="showModal" class="fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50" @click="closeModal">
-     <div class="w-full max-w-2xl p-4 bg-white rounded-lg shadow-lg" @click.stop>
-       <div class="flex justify-between items-center">
-         <h2 class="text-xl font-semibold text-gray-800">{{ selectedProject.name }}</h2>
-         <button class="text-gray-500 hover:text-gray-700" @click="closeModal">
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-           </svg>
-         </button>
-       </div>
-       
-       <div class="mt-4">
-         <p class="text-gray-600">{{ selectedProject.description }}</p>
-         <p class="text-gray-600">{{ selectedProject.beneficiray }}</p>
-         <p class="text-gray-600">{{ selectedProject.fund }}</p>
-         <p class="text-gray-600">{{ selectedProject.objective }}</p>
-         
-         <p class="mt-2 text-gray-600"><strong>Timeline:</strong></p>
-         <ul>
-           <li v-for="(timeline, index) in selectedProject.timeline" :key="index" class="text-gray-600">
-             {{ timeline }}
-           </li>
-         </ul>
-       </div>
-       
-       <div class="mt-4 text-right">
-         <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" @click="closeModal">Close</button>
-       </div>
-     </div>
-   </div>
+   <div v-if="showModal" class="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-70" @click="closeModal">
+    <div class="w-full max-w-3xl p-6 bg-white rounded-lg shadow-lg" @click.stop>
+      
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-semibold text-gray-800">{{ selectedProject.name }}</h2>
+        <button class="text-gray-500 hover:text-gray-700" @click="closeModal">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="space-y-4">
+        
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Description:</h3>
+          <p class="text-gray-600">{{ selectedProject.description }}</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Beneficiary:</h3>
+          <p class="text-gray-600">{{ selectedProject.beneficiray }}</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Funding:</h3>
+          <p class="text-gray-600">{{ selectedProject.fund }}</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Objective:</h3>
+          <p class="text-gray-600">{{ selectedProject.objective }}</p>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Timeline:</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li v-for="(timeline, index) in selectedProject.timeline" :key="index" class="text-gray-600">
+              {{ timeline }}
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+      
+      <div class="mt-6 text-right">
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none" @click="closeModal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
    <Footer/>
  </template>
 <script>
