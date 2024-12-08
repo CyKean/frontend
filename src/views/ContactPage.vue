@@ -56,7 +56,7 @@ export default {
       this.loading = true; // Start loading when the form is submitted
       try {
         // Send the form data to the backend API
-        const response = await axios.post("http://localhost:3000/api/contact", this.form);
+        const response = await axios.post("https://backend-w85m.onrender.com/api/contact", this.form);
 
         // Show success toastr notification
         toastr.success("Your message has been sent successfully!", "Success");

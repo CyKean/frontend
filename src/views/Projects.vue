@@ -72,7 +72,7 @@ export default {
   methods: {
     async fetchProjectLocations() {
       try {
-        const response = await axios.get('http://localhost:3000/api/project-location');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/project-location');
         return response.data;  // Contains an array of project locations
       } catch (error) {
         console.error('Error fetching project locations:', error);

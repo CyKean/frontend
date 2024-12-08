@@ -99,7 +99,7 @@ export default {
             this.loading = true; // Set loading to true when submitting
 
             try {
-                const response = await axios.post('http://localhost:3000/api/login', {
+                const response = await axios.post('https://backend-w85m.onrender.com/api/login', {
                     email: this.email,
                     password: this.password,
                 });
@@ -148,7 +148,7 @@ export default {
         },
         async fetchSession() {
             try {
-                const response = await axios.get('http://localhost:3000/api/check-session');
+                const response = await axios.get('https://backend-w85m.onrender.com/api/check-session');
                 if (response.data.loggedIn) {
                     this.$data.username = response.data.user.username; 
                 }

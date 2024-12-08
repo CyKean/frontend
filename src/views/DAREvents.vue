@@ -146,16 +146,16 @@
     methods: {
       async getEvents() {
         this.loading = true;
-        const response = await axios.get('http://localhost:3000/api/events');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/events');
         this.events = response.data;
         this.generateCalendar();
         this.loading = false;
       },
       async submitEvent() {
         if (this.editMode) {
-          await axios.post(`http://localhost:3000/api/events/update/${this.eventId}`, this.event);
+          await axios.post(`https://backend-w85m.onrender.com/api/events/update/${this.eventId}`, this.event);
         } else {
-          await axios.post('http://localhost:3000/api/events/add', this.event);
+          await axios.post('https://backend-w85m.onrender.com/api/events/add', this.event);
         }
         this.resetForm();
         this.getEvents();

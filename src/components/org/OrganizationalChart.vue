@@ -217,7 +217,7 @@
 
         // this.diagram.model = new go.TreeModel(this.nodeDataArray);
   
-        axios.post('http://localhost:3000/api/save-chart', this.nodeDataArray)
+        axios.post('https://backend-w85m.onrender.com/api/save-chart', this.nodeDataArray)
           .then(response => {
             toastr.success(response.data.message);
           })

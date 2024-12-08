@@ -38,7 +38,7 @@ export default {
     // Fetch all announcements from the backend
     async getAllAnnouncements() {
       try {
-        const response = await axios.get('http://localhost:3000/api/announcements');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/announcements');
         this.announcements = response.data;
       } catch (error) {
         console.error('Error fetching announcements:', error);

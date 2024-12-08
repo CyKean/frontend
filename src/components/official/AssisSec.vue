@@ -114,7 +114,7 @@ export default {
                 const cleanedCards = this.cards.map(({ isEditing, ...card }) => card); 
 
                 const assisSecData = { cards: cleanedCards }; 
-                await axios.post('http://localhost:3000/api/save-assissec', { assisSecData });
+                await axios.post('https://backend-w85m.onrender.com/api/save-assissec', { assisSecData });
                 toastr.success('Added successfully');
                 this.cards[index].isEditing = false; 
             } catch (error) {
@@ -124,7 +124,7 @@ export default {
         async fetchAssisSecData(){
             this.loading = true; 
             try {
-                const { data } = await axios.get('http://localhost:3000/api/get-assissec');
+                const { data } = await axios.get('https://backend-w85m.onrender.com/api/get-assissec');
                 this.cards = data.cards;
                 this.loading = false; 
             } catch (error) {

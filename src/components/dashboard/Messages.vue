@@ -46,7 +46,7 @@ export default {
     // Fetch unread messages from the backend
     async fetchMessages() {
       try {
-        const response = await axios.get('http://localhost:3000/api/messages');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/messages');
         const data = response.data;
         this.unreadMessages = data.unreadMessages;
         this.readMessages = data.readMessages;

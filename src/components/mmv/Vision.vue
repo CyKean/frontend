@@ -58,7 +58,7 @@ export default {
         async loadVision() {
             this.loading = true; // Start loading
             try {
-                const response = await axios.get('http://localhost:3000/api/get-vision');
+                const response = await axios.get('https://backend-w85m.onrender.com/api/get-vision');
                 this.vision = response.data.vision || ''; // Load the initial vision content
             } catch (error) {
                 toastr.error('Error fetching vision', 'Error');
@@ -69,7 +69,7 @@ export default {
         },
         async saveChanges() {
             try {
-                const response = await axios.post('http://localhost:3000/api/save-vision', { vision: this.vision });
+                const response = await axios.post('https://backend-w85m.onrender.com/api/save-vision', { vision: this.vision });
                 toastr.success(response.data.message, 'Success');
                 this.editMode = false; // Disable edit mode
             } catch (error) {

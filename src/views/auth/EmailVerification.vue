@@ -48,7 +48,7 @@ export default {
       this.errors.code = null;
 
       try {
-        const response = await axios.post('http://localhost:3000/api/verify-email', {
+        const response = await axios.post('https://backend-w85m.onrender.com/api/verify-email', {
           code: this.code,
         });
 

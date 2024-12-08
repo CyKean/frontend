@@ -115,7 +115,7 @@ export default {
     },
     async fetchChartData() {
       try {
-        const response = await axios.get("http://localhost:3000/api/get-chart");
+        const response = await axios.get("https://backend-w85m.onrender.com/api/get-chart");
 
         this.nodeDataArray = response.data || [];
         localStorage.setItem("orgChartData", JSON.stringify(this.nodeDataArray));

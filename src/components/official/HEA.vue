@@ -113,7 +113,7 @@ export default {
                 const cleanedCards = this.cards.map(({ isEditing, ...card }) => card); 
 
                 const heaData = { cards: cleanedCards }; 
-                await axios.post('http://localhost:3000/api/save-hea', { heaData });
+                await axios.post('https://backend-w85m.onrender.com/api/save-hea', { heaData });
                 alert('HEA data saved successfully');
                 this.cards[index].isEditing = false; 
                 toastr.success('Saved');
@@ -124,7 +124,7 @@ export default {
         async fetchHeaData() {
             this.loading = true;
             try {
-                const response = await axios.get('http://localhost:3000/api/get-hea');
+                const response = await axios.get('https://backend-w85m.onrender.com/api/get-hea');
                 this.cards = response.data.cards || [];
                 this.loading = false;
                 console.log(response.data.cards);

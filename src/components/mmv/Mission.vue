@@ -57,7 +57,7 @@ export default {
         async loadMission() {
             this.loading = true; // Show loader when fetching data
             try {
-                const response = await axios.get('http://localhost:3000/api/get-mission');
+                const response = await axios.get('https://backend-w85m.onrender.com/api/get-mission');
                 this.mission = response.data.mission || '';
             } catch (error) {
                 toastr.error('Failed to load mission content.', 'Error');
@@ -69,7 +69,7 @@ export default {
         async saveChanges() {
             this.loading = true; // Show loader when saving data
             try {
-                const response = await axios.post('http://localhost:3000/api/save-mission', { mission: this.mission });
+                const response = await axios.post('https://backend-w85m.onrender.com/api/save-mission', { mission: this.mission });
                 toastr.success(response.data.message, 'Success');
                 this.missionEditMode = false;
             } catch (error) {

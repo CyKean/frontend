@@ -45,7 +45,7 @@ export default {
   methods: {
     async fetchEvents() {
       try {
-        const response = await fetch("http://localhost:3000/api/get-events");
+        const response = await fetch("https://backend-w85m.onrender.com/api/get-events");
         const allEvents = await response.json();
 
         // Filter events to include only those with dates on or after today

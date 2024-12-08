@@ -106,7 +106,7 @@
     methods: {
       async fetchOfficialsData() {
         try {
-          const response = await axios.get('http://localhost:3000/api/officials');
+          const response = await axios.get('https://backend-w85m.onrender.com/api/officials');
           this.officialsData = response.data;
         } catch (error) {
           this.error = 'Failed to fetch data. Please try again later.';

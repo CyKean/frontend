@@ -63,7 +63,7 @@ export default {
         async loadMandate() {
             this.loading = true; // Show loader when fetching data
             try {
-                const response = await axios.get('http://localhost:3000/api/get-mandate');
+                const response = await axios.get('https://backend-w85m.onrender.com/api/get-mandate');
                 this.mandate = response.data.mandate || '';
                 this.originalMandate = this.mandate;
             } catch (error) {
@@ -76,7 +76,7 @@ export default {
         async saveChanges() {
             this.loading = true; // Show loader when saving data
             try {
-                const response = await axios.post('http://localhost:3000/api/save-mandate', { mandate: this.mandate });
+                const response = await axios.post('https://backend-w85m.onrender.com/api/save-mandate', { mandate: this.mandate });
                 toastr.success(response.data.message || 'Mandate saved successfully.', 'Success');
                 this.mandateEditMode = false;
                 this.originalMandate = this.mandate;

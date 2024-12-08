@@ -134,7 +134,7 @@
         console.log(userDetails);
   
         // Example: Send to backend to store additional details in Firebase
-        axios.post('http://localhost:3000/api/submitUserDetails', userDetails)
+        axios.post('https://backend-w85m.onrender.com/api/submitUserDetails', userDetails)
           .then(response => {
             // If successfully inserted, remove email from localStorage
             localStorage.removeItem('userEmail');

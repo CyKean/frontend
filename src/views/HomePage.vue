@@ -165,7 +165,7 @@ export default {
       }
 
       try {
-        const response = await axios.post(`/api/comments/${article.id}`, {
+        const response = await axios.post(`https://backend-w85m.onrender.com/api/comments/${article.id}`, {
           comment: article.comment,
           userId: user.id, // Include user ID
           username: user.username, // Include username
@@ -184,7 +184,7 @@ export default {
 
   async fetchComments(articleId = null) {
     try {
-      const response = await fetch("/api/data");
+      const response = await fetch("https://backend-w85m.onrender.com/api/data");
       const data = await response.json();
 
       if (articleId) {
@@ -214,7 +214,7 @@ export default {
     async fetchData() {
       this.loading = true;
       try {
-        const response = await fetch("/api/data");
+        const response = await fetch("https://backend-w85m.onrender.com/api/data");
         const data = await response.json();
 
         this.secretary = data.secretary || { name: "", image: "", shortInfo: "" };
@@ -235,7 +235,7 @@ export default {
     async getEvents() {
       this.loading = true;
       try {
-        const response = await axios.get('/api/events');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/events');
         this.events = response.data;
         this.loading = false;
       } catch (error) {

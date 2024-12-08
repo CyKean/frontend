@@ -91,7 +91,7 @@
     methods: {
       async fetchMessages() {
         try {
-          const response = await axios.get('http://localhost:3000/api/messages');
+          const response = await axios.get('https://backend-w85m.onrender.com/api/messages');
           const data = response.data;
           this.unreadMessages = data.unreadMessages;
           this.readMessages = data.readMessages;
@@ -125,7 +125,7 @@
       async markAsRead(message) {
         try {
           // Send a PUT request to update the isRead status in the backend
-          await axios.post(`http://localhost:3000/api/messages/${message.id}`, { isRead: true });
+          await axios.post(`https://backend-w85m.onrender.com/api/messages/${message.id}`, { isRead: true });
   
           // Update the message locally
           message.isRead = true;

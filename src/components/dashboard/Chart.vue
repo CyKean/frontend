@@ -31,7 +31,7 @@ export default {
   methods: {
     async fetchProjects() {
       try {
-        const response = await axios.get('http://localhost:3000/api/get-project');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/get-project');
         this.projects = response.data;
         console.log(this.projects)
         this.updateChartData(this.projects);

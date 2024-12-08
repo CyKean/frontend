@@ -165,7 +165,7 @@
                             <div class="overflow-y-auto max-h-[75vh] p-4">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center pb-6">
                                     <div class="flex justify-center md:justify-start">
-                                        <img class="w-40 h-40 rounded-full shadow-lg" :src="`http://localhost:3000/uploads/${selectedLeader.image}`" alt="Leader image" />
+                                        <img class="w-40 h-40 rounded-full shadow-lg" :src="`https://backend-w85m.onrender.com/uploads/${selectedLeader.image}`" alt="Leader image" />
                                     </div>
 
                                     <div class="text-left space-y-2">
@@ -374,7 +374,7 @@ export default {
         async fetchLeaders() {
             this.loading = true; 
             try {
-                const response = await axios.get('http://localhost:3000/api/leaders');
+                const response = await axios.get('https://backend-w85m.onrender.com/api/leaders');
                 this.leaders = response.data || []; 
                 console.log('Leaders fetched:', this.leaders);
                 this.loading = false;
@@ -410,7 +410,7 @@ export default {
             this.termEnd = leader.termEnd || '';
             this.shortInfo = leader.shortInfo || '';
             this.timeline = Array.isArray(leader.milestones) ? [...leader.milestones] : (leader.milestones ? [leader.milestones] : []);
-            this.previewImage = leader.image ? `http://localhost:3000/uploads/${leader.image}` : null;
+            this.previewImage = leader.image ? `https://backend-w85m.onrender.com/uploads/${leader.image}` : null;
             this.file = null;
 
             console.log('Timeline:', this.timeline);
@@ -483,7 +483,7 @@ export default {
             }
 
             try {
-                const response = await axios.post('http://localhost:3000/api/submit-leaders', formData);
+                const response = await axios.post('https://backend-w85m.onrender.com/api/submit-leaders', formData);
                 console.log('Data inserted/updated successfully:', response.data);
                 this.closeModal(); 
                 toastr.success('Leader added successfully');
@@ -498,7 +498,7 @@ export default {
             if (confirmDelete) {
                 try {
                     const leaderId = leader.id; 
-                    const response = await axios.delete(`http://localhost:3000/api/leaders/${leaderId}`); // Use DELETE method
+                    const response = await axios.delete(`https://backend-w85m.onrender.com/api/leaders/${leaderId}`); // Use DELETE method
                     console.log('Leader deleted successfully:', response.data);
                     this.leaders = this.leaders.filter(item => item.id !== leaderId);
                     alert('Leader deleted successfully');

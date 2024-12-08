@@ -75,7 +75,7 @@
     methods: {
       async fetchLeaders() {
         try {
-          const response = await axios.get('http://localhost:3000/api/leaders');
+          const response = await axios.get('https://backend-w85m.onrender.com/api/leaders');
           this.leaders = response.data;
         } catch (error) {
           this.error = 'Failed to fetch leaders. Please try again later.';

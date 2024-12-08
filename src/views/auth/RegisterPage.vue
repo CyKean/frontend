@@ -147,7 +147,7 @@
         },
         async checkEmailExists(email) {
             try {
-                const response = await axios.post('http://localhost:3000/api/check-email', { email });
+                const response = await axios.post('https://backend-w85m.onrender.com/api/check-email', { email });
                 return response.data;
             } catch (error) {
                 console.error('Failed to check email existence:', error);
@@ -188,7 +188,7 @@
             }
 
             try {
-                const response = await axios.post('http://localhost:3000/api/createUser', {
+                const response = await axios.post('https://backend-w85m.onrender.com/api/createUser', {
                     username: this.username,
                     email: this.email,
                     password: this.password

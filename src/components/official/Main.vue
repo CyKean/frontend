@@ -91,7 +91,7 @@ export default {
             try {
                 const cleanedDescriptions = this.descriptions.filter(desc => desc.value !== '');
 
-                const response = await axios.post('http://localhost:3000/api/save-secretary', {
+                const response = await axios.post('https://backend-w85m.onrender.com/api/save-secretary', {
                     name: this.name,
                     descriptions: cleanedDescriptions.map(desc => desc.value),
                 });
@@ -119,7 +119,7 @@ export default {
         async getSecretaryData() {
             this.loading = true;
             try {
-                const response = await axios.get('http://localhost:3000/api/get-secretary');
+                const response = await axios.get('https://backend-w85m.onrender.com/api/get-secretary');
 
                 if (response.data && response.data.success) {
                     const { name, descriptions } = response.data.data || {}; 

@@ -372,7 +372,7 @@ export default {
     },
     addProject() {
       axios
-        .post("http://localhost:3000/api/save-project", this.project)
+        .post("https://backend-w85m.onrender.com/api/save-project", this.project)
         .then((response) => {
           this.projects.push(response.data);
           this.getProject();
@@ -464,7 +464,7 @@ export default {
     async getProject() {
       this.isLoading = true;
       try {
-        const response = await axios.get("http://localhost:3000/api/get-project");
+        const response = await axios.get("https://backend-w85m.onrender.com/api/get-project");
         this.projects = response.data; // Store the data in 'projects'
         this.isLoading = false;
       } catch (error) {

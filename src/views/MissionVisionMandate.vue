@@ -93,7 +93,7 @@ export default {
 
     async fetchMissionVisionMandate() {
       try {
-        const response = await axios.get('http://localhost:3000/api/missionvisionmandate');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/missionvisionmandate');
         console.log('API response:', response.data);
         this.data = response.data;
       } catch (error) {

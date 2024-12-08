@@ -258,7 +258,7 @@ export default {
     async getEvents() {
       this.loading = true;
       try {
-        const response = await axios.get('http://localhost:3000/api/events');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/events');
         this.events = response.data;
         this.generateCalendar();
         this.loading = false;
@@ -284,7 +284,7 @@ export default {
 
           if (confirmation.isConfirmed) {
             try {
-              await axios.post(`http://localhost:3000/api/events/update/${this.eventId}`, this.event);
+              await axios.post(`https://backend-w85m.onrender.com/api/events/update/${this.eventId}`, this.event);
               toastr.success('Event updated successfully!');
             } catch (error) {
               console.error('Error updating event:', error.response || error);
@@ -296,7 +296,7 @@ export default {
           }
         } else {
           try {
-            const response = await axios.post('http://localhost:3000/api/events/add', this.event);
+            const response = await axios.post('https://backend-w85m.onrender.com/api/events/add', this.event);
             console.log('Event added successfully:', response.data); // Log the success response
             toastr.success('Event added successfully!');
           } catch (error) {

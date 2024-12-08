@@ -29,7 +29,7 @@
     <div v-for="newsItem in paginatedNews" :key="newsItem.id" class="border border-green-200 p-3 rounded-md shadow-sm hover:shadow-xl transition">
       <!-- <img :src="`http://localhost:3000/uploads/${newsItem.image}`" class="w-full h-40 object-cover rounded-lg mb-4"/> -->
       <div class="w-full h-40 mb-4">
-        <img v-if="newsItem.image" :src="`http://localhost:3000/uploads/${newsItem.image}`" alt="News Image" class="w-full h-full object-cover rounded-lg" />
+        <img v-if="newsItem.image" :src="`https://backend-w85m.onrender.com/uploads/${newsItem.image}`" alt="News Image" class="w-full h-full object-cover rounded-lg" />
         <div v-else class="flex justify-center items-center w-full h-full bg-gray-200 rounded-lg"></div>
       </div>
 
@@ -194,7 +194,7 @@ export default {
       this.modalTitle = 'Edit News';
       this.title = newsItem.title;
       this.message = newsItem.message;
-      this.imagePreview = `http://localhost:3000/uploads/${newsItem.image}`;
+      this.imagePreview = `https://backend-w85m.onrender.com/uploads/${newsItem.image}`;
       this.editingNewsId = newsItem.id;
       this.showModal.newsModal = true;
       this.$nextTick(() => {
@@ -257,7 +257,7 @@ export default {
           });
 
           if (result.isConfirmed) {
-            response = await axios.post(`http://localhost:3000/api/update-news/${this.editingNewsId}`, formData);
+            response = await axios.post(`https://backend-w85m.onrender.com/api/update-news/${this.editingNewsId}`, formData);
             Swal.fire('Updated!', 'Your news has been updated.', 'success');
           }
         } else {
@@ -272,7 +272,7 @@ export default {
           });
 
           if (result.isConfirmed) {
-            response = await axios.post('http://localhost:3000/api/add-news', formData);
+            response = await axios.post('https://backend-w85m.onrender.com/api/add-news', formData);
             Swal.fire('Added!', 'Your news has been added.', 'success');
           }
         }
@@ -288,7 +288,7 @@ export default {
     async getNews() {
       try {
         this.loading = true; 
-        const response = await axios.get('http://localhost:3000/api/get-news');
+        const response = await axios.get('https://backend-w85m.onrender.com/api/get-news');
         this.news = response.data.data;
         this.filterNews();
       } catch (error) {

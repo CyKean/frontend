@@ -209,7 +209,7 @@ export default {
                 });
 
                 const payload = { categories: cleanedCategories };
-                await axios.post('http://localhost:3000/api/save-director', payload);
+                await axios.post('https://backend-w85m.onrender.com/api/save-director', payload);
                
                 toastr.success('Saved');
                 if (this.categories[index]) {
@@ -223,7 +223,7 @@ export default {
         async fetchDirectorData() {
             this.loading = true;
             try {
-                const response = await axios.get('http://localhost:3000/api/get-director'); // API endpoint to get director data
+                const response = await axios.get('https://backend-w85m.onrender.com/api/get-director'); // API endpoint to get director data
                 const { categories } = response.data;  // Destructure categories from the response
                 this.categories = categories;  // Assign the categories to the component's data
                 this.dropdownOpen = new Array(this.categories.length).fill(false);  // Initialize dropdown states if needed
