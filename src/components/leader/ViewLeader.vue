@@ -135,7 +135,7 @@
                         </div>
 
                         <div class="flex flex-col items-center pb-2 h-60"> <!-- Fixed height for the card -->
-                            <img class="w-24 h-24 mb-3 rounded-full shadow-md shadow-green-200" :src="`http://localhost:3000/uploads/${leader.image}`" alt="Leader Image" />
+                            <img class="w-24 h-24 mb-3 rounded-full shadow-md shadow-green-200" :src="`https://backend-w85m.onrender.com/uploads/${leader.image}`" alt="Leader Image" />
 
                             <h5 class="mb-1 font-medium text-gray-900 text-center text-[clamp(0.6rem, 1.5vw, 0.9rem)] leading-tight max-w-xs overflow-hidden whitespace-nowrap">{{ leader.name }}</h5>
 
