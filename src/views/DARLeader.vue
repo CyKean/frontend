@@ -20,7 +20,7 @@
 
             <div class="flex space-x-4">
               <div class="">
-                <img class="mb-3 rounded-full shadow-md shadow-green-200" :src="`http://localhost:3000/uploads/${leader.image}`" alt="Leader Image" />
+                <img class="mb-3 rounded-full shadow-md shadow-green-200" :src="`https://backend-w85m.onrender.com/uploads/${leader.image}`" alt="Leader Image" />
               </div>
 
               <div class="flex flex-col justify-center items-left">
