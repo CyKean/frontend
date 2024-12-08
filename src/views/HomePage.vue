@@ -8,7 +8,7 @@
         <h2 class="font-bold text-green-300 text-lg mb-4">The Secretary</h2>
       
         <div class="flex justify-center">
-          <img class="w-24 h-24 mb-3 rounded-full shadow-md shadow-green-200" :src="`http://localhost:3000/uploads/${secretary.image}`" alt="Leader Image" />
+          <img class="w-24 h-24 mb-3 rounded-full shadow-md shadow-green-200" :src="`https://backend-w85m.onrender.com/uploads/${secretary.image}`" alt="Leader Image" />
         </div>
 
         <div v-if="loading" class="text-center py-6 flex justify-center">
@@ -36,7 +36,7 @@
           <div v-for="article in (showAllNews ? news : news.slice(0, 4))" :key="article.id" class="bg-white border border-green-200 flex shadow-lg rounded-lg p-4">
             <div class="flex flex-row items-start w-full space-x-4">
               <div class="flex items-center justify-center">
-                <img v-if="article.image" class="w-24 h-24 rounded-md img shadow-md shadow-green-200" :src="`http://localhost:3000/uploads/${article.image}`" alt="Leader Image"/>
+                <img v-if="article.image" class="w-24 h-24 rounded-md img shadow-md shadow-green-200" :src="`https://backend-w85m.onrender.com/uploads/${article.image}`" alt="Leader Image"/>
                 <div v-else class="w-24 h-24 bg-gray-200 rounded-md"></div>
               </div>
               <div class="flex flex-col ml-4 w-full">
