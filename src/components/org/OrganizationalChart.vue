@@ -4,8 +4,11 @@
       <button @click="addRootNode" class="bg-yellow-200">Add Initial Node</button>
       <button @click="logChartData" class="bg-green-500 text-green-100">Save Chart</button>
     </div>
+
+    <!-- Chart container -->
     <div id="chartDiv" class="chart rounded-md border border-green-200" style="width: 100%; height: 500px;"></div>
 
+    <!-- Modal for editing node -->
     <div v-if="isModalVisible" class="modal-overlay z-10" @click.self="closeModal">
       <div class="modal">
         <h3>Edit Node</h3>
@@ -44,7 +47,7 @@ export default {
   },
 
   mounted() {
-    // Initialize the GoJS Diagram
+    // Initialize GoJS Diagram
     this.diagram = go.GraphObject.make(go.Diagram, "chartDiv", {
       layout: go.GraphObject.make(go.TreeLayout, {
         angle: 90,
@@ -55,6 +58,7 @@ export default {
       "click": (e) => this.handleDiagramClick(e),
     });
 
+    // Define the node template
     this.diagram.nodeTemplate = go.GraphObject.make(
       go.Node,
       "Auto",
@@ -81,31 +85,37 @@ export default {
       }
     );
 
+    // Define the link template
     this.diagram.linkTemplate = go.GraphObject.make(go.Link,
       go.GraphObject.make(go.Shape, { strokeWidth: 2, stroke: "#000" }),
       go.GraphObject.make(go.Shape, { toArrow: "Standard" })
     );
 
+    // Fetch chart data after the component is mounted
     this.fetchChartData();
+    this.show();
   },
 
   methods: {
+    // Fetch chart data from the API
     async fetchChartData() {
       try {
         const response = await axios.get("https://backend-w85m.onrender.com/api/get-chart");
-
+        
         if (response.data && response.data.nodes) {
           const fetchedData = response.data.nodes;
+          
+          this.nodeDataArray = fetchedData.map((node, index) => ({
+            ...node,
+            parent: index === 0 ? undefined : 1  // First node has no parent, others are children of node 1
+          }));
 
-          this.nodeDataArray = fetchedData.map((node, index) => {
-            return {
-              ...node,
-              parent: index === 0 ? undefined : 1 // The first node (CEO) has no parent, others are children of node with key 1
-            };
-          });
+          console.log(this.nodeDataArray);
 
+          // Save to local storage
           localStorage.setItem("orgChartData", JSON.stringify(this.nodeDataArray));
 
+          // Set the model with the fetched data
           this.diagram.model = new go.TreeModel(this.nodeDataArray);
         } else {
           console.error("No valid data found from the API.");
@@ -115,6 +125,11 @@ export default {
       }
     },
 
+    show(){
+      this.diagram.model = new go.TreeModel(this.nodeDataArray);
+    },
+
+    // Add the root node (CEO)
     addRootNode() {
       if (this.nodeDataArray.length > 0) {
         toastr.warning("Root node already exists.");
@@ -127,10 +142,11 @@ export default {
         fontColor: "#000000",
       };
       this.nodeDataArray.push(rootNode);
-      this.show();
+      this.updateChart();
       toastr.success("Root node added successfully.");
     },
 
+    // Add a new node under a parent node
     addNode(parentNodeData) {
       const newKey = this.nodeDataArray.length + 1;
       const newNode = {
@@ -140,23 +156,22 @@ export default {
         color: "lightblue",
         fontColor: "#000000",
       };
-
       this.nodeDataArray.push(newNode);
-      this.show();
+      this.updateChart();
       toastr.success("Node added successfully.");
     },
 
-    show() {
+    // Update the chart with the latest data
+    updateChart() {
       const model = new go.TreeModel(this.nodeDataArray);
       this.diagram.model = model;
     },
 
+    // Log and save chart data
     logChartData() {
       console.log("Current Chart Data:", this.nodeDataArray);
-
       localStorage.setItem("orgChartData", JSON.stringify(this.nodeDataArray));
-
-      axios.post('http://localhost:3000/api/save-chart', this.nodeDataArray)
+      axios.post('https://backend-w85m.onrender.com/api/save-chart', this.nodeDataArray)
         .then(response => {
           toastr.success(response.data.message);
         })
@@ -165,11 +180,13 @@ export default {
         });
     },
 
+    // Edit a node
     editNode(nodeData) {
       this.editNodeData = { ...nodeData };
       this.isModalVisible = true;
     },
 
+    // Handle node click
     handleNodeClick(node) {
       if (this.selectedNode === node) {
         this.selectedNode = null;
@@ -178,10 +195,12 @@ export default {
       }
     },
 
+    // Handle diagram click (to deselect node)
     handleDiagramClick() {
       this.selectedNode = null;
     },
 
+    // Context menu for node actions (Edit, Delete, Add)
     makeContextMenu() {
       return go.GraphObject.make(go.Adornment, "Vertical",
         go.GraphObject.make(go.TextBlock, {
@@ -208,6 +227,7 @@ export default {
       );
     },
 
+    // Delete a node
     deleteNode(nodeData) {
       if (nodeData.key === this.rootNodeKey) {
         toastr.error("Cannot delete the root node.");
@@ -217,22 +237,24 @@ export default {
       const model = this.diagram.model;
       model.removeNodeData(nodeData);
       this.diagram.commitTransaction("Delete Node");
-      this.show();
+      this.updateChart();
       toastr.success("Node deleted successfully.");
     },
 
+    // Save edited node
     saveEditNode() {
       const updatedNode = this.nodeDataArray.find(node => node.key === this.editNodeData.key);
       if (updatedNode) {
         updatedNode.name = this.editNodeData.name;
         updatedNode.color = this.editNodeData.color;
         updatedNode.fontColor = this.editNodeData.fontColor;
-        this.show();
+        this.updateChart();
         toastr.success("Node updated successfully.");
         this.closeModal();
       }
     },
 
+    // Close the modal
     closeModal() {
       this.isModalVisible = false;
     },
@@ -240,8 +262,13 @@ export default {
 };
 </script>
 
+
   
   <style scoped>
+  #chartDiv {
+  width: 100%;
+  height: 500px;
+}
   .container {
     max-width: 1200px;
     margin: 20px auto;
