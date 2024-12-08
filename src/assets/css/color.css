@@ -1,0 +1,19 @@
+:root {
+    --dark-green: #005C2E;      /* Dark Green */
+    --light-green: #A8D5BA;     /* Light Green */
+    --golden-yellow: #FFD700;    /* Golden Yellow */
+    --white: #FFFFFF;           /* White */
+    --dark-gray: #333333;       /* Dark Gray */
+    --black: #000000; 
+}
+
+::-webkit-scrollbar-track {
+    width: 4px;  
+}
+::-webkit-scrollbar-track {
+    background: #F5F5DC; 
+}
+::-webkit-scrollbar-thumb {
+    background: var(--dark-green);
+    border-radius: 10px; 
+}
