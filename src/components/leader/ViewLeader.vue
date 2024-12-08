@@ -1,6 +1,6 @@
 <template>
 
-    <div v-if="showModal" id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex justify-center items-center w-full overflow-y-auto">
+    <div v-if="showModal" class="bg-black bg-opacity-70 fixed inset-0 z-50 flex justify-center items-center w-full overflow-y-auto">
         <div class="relative p-4 h-full">
             <div class="relative w-full h-auto bg-white rounded-lg shadow dark:bg-gray-700 mb-4">
                 <div class="flex items-center justify-between p-2 md:p-2 rounded-t dark:border-gray-600">
@@ -135,7 +135,7 @@
                         </div>
 
                         <div class="flex flex-col items-center pb-2 h-60"> <!-- Fixed height for the card -->
-                            <img class="w-24 h-24 mb-3 rounded-full shadow-md shadow-green-200" :src="`https://backend-w85m.onrender.com/uploads/${leader.image}`" alt="Leader Image" />
+                            <img class="w-24 h-24 mb-3 rounded-full shadow-md shadow-green-200" :src="`http://localhost:3000/uploads/${leader.image}`" alt="Leader Image" />
 
                             <h5 class="mb-1 font-medium text-gray-900 text-center text-[clamp(0.6rem, 1.5vw, 0.9rem)] leading-tight max-w-xs overflow-hidden whitespace-nowrap">{{ leader.name }}</h5>
 
@@ -150,7 +150,7 @@
 
                     </div>
 
-                    <div v-if="isModalOpen && selectedLeader.id === leader.id" class="fixed inset-0 z-50 flex justify-center items-center w-full h-screen bg-black bg-opacity-50">
+                    <div v-if="isModalOpen && selectedLeader.id === leader.id" class="fixed inset-0 z-50 flex justify-center items-center w-full h-screen bg-black bg-opacity-70">
                         <div class="relative w-full max-w-2xl max-h-screen">
                             <div class="relative bg-white max-h-full rounded-lg shadow dark:bg-gray-700 overflow-hidden">
                             <div class="flex items-center justify-between p-2 md:p-2 rounded-t dark:border-gray-600">
@@ -165,7 +165,7 @@
                             <div class="overflow-y-auto max-h-[75vh] p-4">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center pb-6">
                                     <div class="flex justify-center md:justify-start">
-                                        <img class="w-40 h-40 rounded-full shadow-lg" :src="`https://backend-w85m.onrender.com/uploads/${selectedLeader.image}`" alt="Leader image" />
+                                        <img class="w-40 h-40 rounded-full shadow-lg" :src="`http://localhost:3000/uploads/${selectedLeader.image}`" alt="Leader image" />
                                     </div>
 
                                     <div class="text-left space-y-2">
@@ -199,14 +199,14 @@
                         </div>
 
 
-                    <div v-if="showModal" class="fixed overflow-auto inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                    <div v-if="showEditModal" class="fixed overflow-auto inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div class="relative p-4 h-full">
                             <div class="relative w-full h-auto bg-white rounded-lg shadow dark:bg-gray-700 mb-4">
                                 <div class="flex items-center justify-between p-2 md:p-2 rounded-t dark:border-gray-600">
                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                                         Edit Leader Information 
                                     </h3>
-                                    <button type="button" @click="showModal = false" class="text-green-400 bg-transparent hover:bg-green-200 hover:text-green-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                                    <button type="button" @click="showEditModal = false" class="text-green-400 bg-transparent hover:bg-green-200 hover:text-green-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                         </svg>
@@ -294,13 +294,12 @@
 
        
     </div>
-<!-- </div> -->
-<div v-if="loading" class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-white bg-opacity-70 z-10">
-            <svg class="animate-spin h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
-                <path d="M4 12a8 8 0 0 0 16 0" stroke="currentColor" stroke-width="4" fill="none" />
-            </svg>
-        </div>
+    <div v-if="loading" class="text-center py-6 flex justify-center">
+      <svg class="animate-spin h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+        <path d="M4 12a8 8 0 0 0 16 0" stroke="currentColor" stroke-width="4" fill="none" />
+      </svg>
+    </div>
 
 
 </template>
@@ -321,6 +320,7 @@ export default {
     data() {
         return {
             showModal: false,
+            showEditModal: false,
             showDropdown: false,
             leaders: [],
             isModalOpen: false,
@@ -374,7 +374,7 @@ export default {
         async fetchLeaders() {
             this.loading = true; 
             try {
-                const response = await axios.get('https://backend-w85m.onrender.com/api/leaders');
+                const response = await axios.get('http://localhost:3000/api/leaders');
                 this.leaders = response.data || []; 
                 console.log('Leaders fetched:', this.leaders);
                 this.loading = false;
@@ -402,7 +402,7 @@ export default {
 
             this.toggleDropdown(index, event);
             this.selectedLeader = leader;  
-            this.showModal = true;
+            this.showEditModal = true;
 
             this.name = leader.name || '';
             this.position = leader.position || '';
@@ -410,7 +410,7 @@ export default {
             this.termEnd = leader.termEnd || '';
             this.shortInfo = leader.shortInfo || '';
             this.timeline = Array.isArray(leader.milestones) ? [...leader.milestones] : (leader.milestones ? [leader.milestones] : []);
-            this.previewImage = leader.image ? `https://backend-w85m.onrender.com/uploads/${leader.image}` : null;
+            this.previewImage = leader.image ? `http://localhost:3000/uploads/${leader.image}` : null;
             this.file = null;
 
             console.log('Timeline:', this.timeline);
@@ -483,7 +483,7 @@ export default {
             }
 
             try {
-                const response = await axios.post('https://backend-w85m.onrender.com/api/submit-leaders', formData);
+                const response = await axios.post('http://localhost:3000/api/submit-leaders', formData);
                 console.log('Data inserted/updated successfully:', response.data);
                 this.closeModal(); 
                 toastr.success('Leader added successfully');
@@ -498,7 +498,7 @@ export default {
             if (confirmDelete) {
                 try {
                     const leaderId = leader.id; 
-                    const response = await axios.delete(`https://backend-w85m.onrender.com/api/leaders/${leaderId}`); // Use DELETE method
+                    const response = await axios.delete(`http://localhost:3000/api/leaders/${leaderId}`); // Use DELETE method
                     console.log('Leader deleted successfully:', response.data);
                     this.leaders = this.leaders.filter(item => item.id !== leaderId);
                     alert('Leader deleted successfully');

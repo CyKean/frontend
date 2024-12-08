@@ -47,7 +47,7 @@ export default {
     data() {
         return {
             vision: '', // Store the vision content
-            editMode: false, // Edit mode flag
+            visionEditMode: false, // Edit mode flag
             loading: false, // Loading state
         };
     },
@@ -58,7 +58,7 @@ export default {
         async loadVision() {
             this.loading = true; // Start loading
             try {
-                const response = await axios.get('https://backend-w85m.onrender.com/api/get-vision');
+                const response = await axios.get('http://localhost:3000/api/get-vision');
                 this.vision = response.data.vision || ''; // Load the initial vision content
             } catch (error) {
                 toastr.error('Error fetching vision', 'Error');
@@ -67,24 +67,24 @@ export default {
                 this.loading = false; // Stop loading once the data is fetched
             }
         },
-        async saveChanges() {
+        async saveVisionChanges() {
             try {
-                const response = await axios.post('https://backend-w85m.onrender.com/api/save-vision', { vision: this.vision });
+                const response = await axios.post('http://localhost:3000/api/save-vision', { vision: this.vision });
                 toastr.success(response.data.message, 'Success');
-                this.editMode = false; // Disable edit mode
+                this.visionEditMode = false; // Disable edit mode
             } catch (error) {
                 toastr.error('Error saving vision', 'Error');
                 console.error('Error saving vision:', error);
             }
         },
         cancelEdit() {
-            this.editMode = false; // Exit edit mode without saving
+            this.visionEditMode = false; // Exit edit mode without saving
             this.loadVision(); // Reload the original content
             toastr.info('Changes discarded.', 'Cancelled');
         },
-        toggleEditMode() {
-            this.editMode = !this.editMode;
-            if (this.editMode) {
+        toggleVisionEditMode() {
+            this.visionEditMode = !this.visionEdiitMode;
+            if (this.visionEditMode) {
                 toastr.info('Edit mode enabled.', 'Info');
             } else {
                 toastr.info('Edit mode disabled.', 'Info');
