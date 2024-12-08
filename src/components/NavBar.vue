@@ -143,7 +143,7 @@
   }
   </style> -->
 
-  <template>
+<template>
     <nav class="bg-gray-800 border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse text-white">
@@ -180,20 +180,28 @@
                     <li><router-link class="nav-link text-white hover:text-green-500 transition" to="/DAR-projects">Projects</router-link></li>
                     <li><router-link class="nav-link text-white hover:text-green-500 transition" to="/DAR-events">Events</router-link></li>
                     <li><router-link class="nav-link text-white hover:text-green-500 transition" to="/contact-us">Contact Us</router-link></li>
+
+                    <!-- Conditionally render the buttons based on user login status -->
                     <div class="hidden md:block">
-                        <button @click="logout" class="text-white font-bold hover:text-green-700">Logout</button>
+                        <button v-if="isLoggedIn" @click="logout" class="text-white font-bold hover:text-green-700">Logout</button>
+                        <router-link v-else to="/login">
+                            <button class="text-white font-bold hover:text-green-700">Login</button>
+                        </router-link>
                     </div>
                     <div class="md:hidden w-full">
-                        <button @click="logout" class="text-white font-bold hover:text-green-700 w-full">Logout</button>
+                        <button v-if="isLoggedIn" @click="logout" class="text-white font-bold hover:text-green-700 w-full">Logout</button>
+                        <router-link v-else to="/login">
+                            <button class="text-white font-bold hover:text-green-700 w-full">Login</button>
+                        </router-link>
                     </div>
                 </ul>
-            
             </div>
         </div>
     </nav>
 
     <div class="span bg-green-600"></div>
 </template>
+
 
 <script>
 import Swal from 'sweetalert2';
