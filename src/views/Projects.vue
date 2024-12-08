@@ -29,7 +29,7 @@
         
         <div>
           <h3 class="text-lg font-semibold text-gray-700">Beneficiary:</h3>
-          <p class="text-gray-600">{{ selectedProject.beneficiray }}</p>
+          <p class="text-gray-600">{{ selectedProject.beneficiary }}</p>
         </div>
         
         <div>
