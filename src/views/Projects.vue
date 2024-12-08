@@ -60,12 +60,6 @@
         
       </div>
       
-      <!-- Footer Section -->
-      <div class="mt-8 flex justify-end">
-        <button class="px-6 py-3 bg-green-600 text-white rounded-md shadow hover:bg-green-700 focus:outline-none transition duration-200" @click="closeModal">
-          Close
-        </button>
-      </div>
     </div>
   </div>
    <Footer/>
